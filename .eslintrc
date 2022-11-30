@@ -1,0 +1,80 @@
+{
+  "env": {
+    "node": true,
+    "es2021": true
+  },
+  "extends": "standard",
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "@typescript-eslint",
+    "simple-import-sort",
+    "import",
+    "unused-imports"
+  ],
+  "rules": {
+    "max-len": ["warn", {
+      "code": 120,
+      "comments": 120,
+      "ignoreUrls": true,
+      "ignoreStrings": true,
+      "ignoreTemplateLiterals": true,
+      "ignoreRegExpLiterals": true,
+      "ignorePattern": "\\s*\"[A-Z_0-9]+\": \".*\",?"
+    }],
+    "no-console": ["warn", {
+      "allow": ["warn", "error", "info"]
+    }],
+    "padded-blocks": ["warn", "never"],
+    "no-trailing-spaces": "warn",
+    "object-curly-spacing": ["warn", "always"],
+    "no-multiple-empty-lines": ["warn", { "max": 1, "maxEOF": 0 }],
+    "eol-last": "warn",
+    "multiline-ternary": "off",
+    "no-case-declarations": "off",
+    "indent": "off",
+    "@typescript-eslint/indent": ["warn", 2, {
+      "SwitchCase": 1,
+      "ignoredNodes": ["TaggedTemplateExpression *"]
+    }],
+    "semi": "off",
+    "@typescript-eslint/semi": ["warn", "always"],
+    "@typescript-eslint/member-delimiter-style": "warn",
+    "quotes": ["warn", "single"],
+    "space-before-function-paren": ["warn", "always"],
+    "comma-dangle": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["warn", {
+      "argsIgnorePattern": "^_$"
+    }],
+    "object-curly-newline": ["warn", {
+      "ObjectPattern": { "multiline": true },
+      "ImportDeclaration": { "multiline": true }
+    }],
+    "n/no-callback-literal": "off",
+
+    "import/first": "warn",
+    "import/newline-after-import": "warn",
+    "import/no-duplicates": "warn",
+    "unused-imports/no-unused-imports": "warn",
+    "simple-import-sort/exports": "warn",
+    "simple-import-sort/imports": ["warn", {
+      "groups": [
+        ["^@?\\w"],
+        ["module-alias"],
+        ["^@/models(/.*|$)"],
+        ["^@/handlers(/.*|$)"],
+        ["^@/(constants|config|typings)(/.*|$)"],
+        ["^@/(app|services)?(/.*|$)"],
+        ["^@/(utils|helpers|middlewares)?(/.*|$)"],
+        // Parent imports (`../*`)
+        ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+        // Relative imports (`./*`)
+        ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"]
+      ]
+    }]
+  }
+}

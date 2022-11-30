@@ -3,9 +3,14 @@
   "description": "Ethstats Network Dashboard",
   "version": "0.2.0",
   "license": "LGPL-3.0",
+  "main": "dist/app.js",
   "scripts": {
-    "dist": "grunt",
-    "start": "node ./app.js"
+    "dev": "concurrently -i -k -p \"[{name}]\" -n \"Node,TS\" -c \"yellow.bold,cyan.bold\" \"yarn watch-js\" \"yarn watch-ts\"",
+    "watch-ts": "tsc -w",
+    "watch-js": "nodemon dist/app.js",
+    "build": "tsc",
+    "start": "yarn build && node dist/app.js",
+    "lint": "eslint \"src/**/*.{js,ts}\""
   },
   "dependencies": {
     "body-parser": "^1.18.3",
@@ -22,6 +27,12 @@
     "ws": "^6.1.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.18.9",
+    "@types/lodash": "^4.14.182",
+    "@types/node": "^18.0.6",
+    "@typescript-eslint/eslint-plugin": "^5.17.0",
+    "@typescript-eslint/parser": "^5.17.0",
+    "concurrently": "^7.3.0",
     "grunt": "^1.0.3",
     "grunt-cli": "^1.3.2",
     "grunt-contrib-clean": "^2.0.0",
@@ -29,6 +40,20 @@
     "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-cssmin": "^3.0.0",
     "grunt-contrib-pug": "^3.0.0",
-    "grunt-contrib-uglify": "^4.0.0"
+    "grunt-contrib-uglify": "^4.0.0",
+    "eslint": "^8.17.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-simple-import-sort": "^7.0.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
+    "nodemon": "^2.0.19",
+    "typescript": "^4.7.3"
+  },
+  "_moduleAliases": {
+    "@": "dist"
   }
 }
