@@ -1,15 +1,15 @@
-import bodyParser from 'body-parser';
-import express from 'express';
-import path from 'path';
+const bodyParser = require('body-parser');
+const express = require('express');
+const path = require('path');
 
 const app = express();
 
-app.set('views', path.join(__dirname, '../views'));
+app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'pug');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, '../../dist')));
+app.use(express.static(path.join(__dirname, '../dist')));
 
 app.get('/', function (req, res) {
   res.render('index');
@@ -40,4 +40,4 @@ app.use(function (err, req, res) {
   });
 });
 
-export default app;
+app.listen(process.env.PORT || 3001);

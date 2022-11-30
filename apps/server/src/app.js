@@ -3,10 +3,9 @@ import http from 'http';
 import { get, isNull, isUndefined, now, values } from 'lodash';
 import Primus from 'primus';
 
-import { Collection } from './lib/collection';
-import { config } from './lib/config';
-import app from './lib/express';
-import { initLogger } from './lib/logger';
+import { Collection } from './collection';
+import { config } from './config';
+import { initLogger } from './logger';
 
 initLogger();
 
@@ -28,9 +27,7 @@ if (!isUndefined(process.env.WS_SECRET) && !isNull(process.env.WS_SECRET)) {
 const { banned, reserved } = config;
 
 // Init http server
-const server = process.env.NODE_ENV === 'production'
-  ? http.createServer()
-  : http.createServer(app);
+const server = http.createServer();
 
 // Init API Socket connection
 const api = new Primus(server, {
@@ -310,4 +307,3 @@ setInterval(() => {
 }, 1000 * 60 * 60);
 
 server.listen(process.env.PORT || 3000);
-console.log('worked');
